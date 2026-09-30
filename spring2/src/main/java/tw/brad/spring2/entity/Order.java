@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -23,5 +24,8 @@ public class Order {
     @JoinColumn(name = "EmployeeID")
     @JsonBackReference
     private Employee employee;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails;
 
 }
