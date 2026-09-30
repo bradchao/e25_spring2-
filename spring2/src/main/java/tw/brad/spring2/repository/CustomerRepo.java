@@ -16,7 +16,8 @@ public interface CustomerRepo extends JpaRepository<Customer,String> {
         FROM Customer c
         WHERE c.customerId = :id
     """)
-    Optional<Customer> findByCustomerID(@Param("id") String id);
+    Optional<Customer> findByCustID(@Param("id") String id);
+    Optional<Customer> findByCustomerId(@Param("id") String id);
 
     /*
         動詞 + 介係詞(By) + 屬性名稱
