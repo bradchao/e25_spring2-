@@ -19,8 +19,8 @@ public class OrderDetail {
     @Column(name = "ProductID")
     private int productId;
 
-    @Column(name = "UnitPrint")
-    private BigDecimal unitPrint;
+    @Column(name = "UnitPrice")
+    private BigDecimal unitPrice;
 
     @Column(name = "Quantity")
     private int quantity;
