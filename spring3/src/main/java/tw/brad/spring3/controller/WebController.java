@@ -1,16 +1,16 @@
 package tw.brad.spring3.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import tw.brad.spring3.apis.MemberForm;
 import tw.brad.spring3.apis.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /*
     JSON(application/json) <- RestController -> Service -> Repository -> Entity
@@ -70,8 +70,23 @@ public class WebController {
     }
 
     @PostMapping("/page3")
-    public String afterPage3(Model model){
-        return "page3";
+    public String afterPage3(Model model,
+                             @ModelAttribute @Valid MemberForm memberForm,
+                             BindingResult bindingResult){
+        System.out.println(memberForm.getAccount());
+        System.out.println(memberForm.getPasswd());
+        System.out.println(memberForm.getName());
+        if (bindingResult.hasErrors()) {
+            return "page3";
+        }
+        return "page4";
+    }
+
+    @RequestMapping("/page5")
+    public String page5(Model model){
+        List<String> areas = List.of("北屯區","南屯區","西屯區","西區","北區");
+        model.addAttribute("areas", areas);
+        return "page5";
     }
 
 }
