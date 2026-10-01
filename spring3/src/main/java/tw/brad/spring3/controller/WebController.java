@@ -2,7 +2,11 @@ package tw.brad.spring3.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import tw.brad.spring3.apis.MemberForm;
 import tw.brad.spring3.apis.User;
 
 import java.time.LocalDateTime;
@@ -51,6 +55,23 @@ public class WebController {
         return "/page1";
     }
 
+    @RequestMapping("/page2/{status}")
+    public String page2(Model model, @PathVariable String status){
+        model.addAttribute("status", status);
+        return "page2";
+    }
 
+    @GetMapping("/page3")
+    public String page3(Model model){
+        MemberForm memberForm = new MemberForm();
+        //memberForm.setAccount("輸入帳號");
+        model.addAttribute("memberForm", memberForm);
+        return "page3";
+    }
+
+    @PostMapping("/page3")
+    public String afterPage3(Model model){
+        return "page3";
+    }
 
 }
