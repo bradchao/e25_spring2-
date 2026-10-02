@@ -7,7 +7,8 @@
     <body>
         <h3>Register Page</h3>
         <hr />
-        <form method="post" th:object="${memberForm}" th:action="@{/member/register}">
+        <form method="post" enctype="multipart/form-data"
+              th:object="${memberForm}" th:action="@{/members/register}">
             <div>
                 <label>Account</label>
                 <input type="text" required="required" th:field="*{account}"/>
@@ -26,6 +27,6 @@
             </div>
             <button type="submit">Register</button>
         </form>
-        <div>Error Message</div>
+        <div th:if="${error}" th:text="${error}">Error Message</div>
     </body>
 </html>
