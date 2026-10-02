@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tw.brad.spring3.dto.MemberForm;
 import tw.brad.spring3.entity.Member;
+import tw.brad.spring3.exception.MemberAccountExistException;
 import tw.brad.spring3.repo.MemberRepo;
 
 @Service
@@ -15,7 +16,7 @@ public class MemberService {
 
     public Member register(MemberForm memberForm) throws Exception{
         String account = memberForm.getAccount();
-        if (repo.findByAccount(account) != null) throw new Exception();
+        if (repo.findByAccount(account) != null) throw new MemberAccountExistException();
 
         Member member = new Member();
         member.setAccount(account);
@@ -28,4 +29,15 @@ public class MemberService {
 
         return repo.save(member);
     }
+
+    public Member login(String account, String passwd){
+        Member member = repo.findByAccount(account);
+        if (member != null && BCrypt.checkpw(passwd, member.getPasswd())){
+            return member;
+        }
+        return null;
+    }
+
+
+
 }

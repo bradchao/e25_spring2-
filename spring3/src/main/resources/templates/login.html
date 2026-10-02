@@ -7,14 +7,14 @@
   <body>
     <h3>Login Page</h3>
     <hr />
-    <form method="post" th:action="@{/member/login}">
+    <form method="post" th:action="@{/members/login}">
       <div>
         <label>Account</label>
-        <input type="text" required="required"/>
+        <input type="text" name="account" required="required"/>
       </div>
       <div>
         <label>Password</label>
-        <input type="password" required="required"/>
+        <input type="password" name="passwd" required="required"/>
       </div>
       <button type="submit">Login</button>
     </form>

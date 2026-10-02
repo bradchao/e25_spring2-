@@ -7,9 +7,9 @@
     <body>
         <h1>Home Page</h1>
         <hr />
-        <h2>Hello, Brad</h2>
-        <div><img /></div>
-        <div>Logout</div>
+        <h2>Hello, <span th:text="${member.name}"></span></h2>
+        <div><img th:src="${icon}" /></div>
+        <div><a th:href="@{/members/logout}">Logout</a></div>
         <hr />
         <div>
             <span>Prev</span>
@@ -25,11 +25,11 @@
                 <th>Address</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>123</td>
-                    <td>xxx</td>
-                    <td>456</td>
-                    <td>bbbb</td>
+                <tr th:each="hotel : ${hotels.content}">
+                    <td th:text="${hotel.id}"></td>
+                    <td th:text="${hotel.name}"></td>
+                    <td th:text="${hotel.tel}"></td>
+                    <td th:text="${hotel.addr}"></td>
                 </tr>
             </tbody>
         </table>
