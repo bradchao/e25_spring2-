@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class MemberForm {
     @NotBlank(message = "Account 不可空")
-    @Email(message = "Email 亂寫")
+    //@Email(message = "Email 亂寫")
     private String account;
 
     @Size(min = 6, message = "密碼長度 >= 6")

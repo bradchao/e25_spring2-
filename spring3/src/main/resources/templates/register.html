@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h3>Register Page</h3>
+        <hr />
+        <form method="post" th:object="${memberForm}" th:action="@{/member/register}">
+            <div>
+                <label>Account</label>
+                <input type="text" required="required" th:field="*{account}"/>
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" required="required" th:field="*{passwd}"/>
+            </div>
+            <div>
+                <label>Name</label>
+                <input type="text" required="required" th:field="*{name}" />
+            </div>
+            <div>
+                <label>Icon</label>
+                <input type="file" th:field="*{iconFile}" />
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <div th:if="" th:text="">Error Message</div>
+    </body>
+</html>
