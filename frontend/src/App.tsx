@@ -4,6 +4,7 @@ import Page2 from './pages/brad02.tsx'
 import Page3 from './pages/brad03.tsx'
 import Page4 from './pages/brad04.tsx'
 import Page5 from './pages/brad05.tsx'
+import Page6 from './pages/brad06.tsx'
 
 function App(){
     return (
@@ -38,6 +39,13 @@ function App(){
                     element={<Page5 />}
                 />
             </Routes>
+            <Routes>
+                <Route
+                    path="/page6"
+                    element={<Page6 />}
+                />
+            </Routes>
+
         </div>
     )
 }
