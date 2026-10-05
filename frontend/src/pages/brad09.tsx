@@ -8,15 +8,16 @@ type OrderType = {
     price: number
 }
 type OrderCardProps = OrderType & {
-    onAdd: (id: number) => void;
+    onChange: (id: number, amount: number) => void;
 }
 
-function OrderCard({id, name, cups, price, onAdd}:OrderCardProps){
+function OrderCard({id, name, cups, price, onChange}:OrderCardProps){
     return (
         <article className='card'>
             <div>Item: {name}</div>
             <div>Price: {price}</div>
-            <button onClick={()=> onAdd(id)}>加一</button>
+            <button onClick={()=> onChange(id, 1)}>加一</button>
+            <button disabled={cups === 0} onClick={()=> onChange(id, -1)}>減一</button>
             <div>{cups} 杯</div>
             <div>{cups * price} 元</div>
         </article>
@@ -30,29 +31,27 @@ export default function App() {
     const [orders, setOrders] = useState<OrderType[]>([
         {id: 1, name: "拿鐵", price: 100, cups: 0},
         {id: 2, name: "美式", price: 120, cups: 0},
-        {id: 3, name: "摩卡1", price: 140, cups: 0},
-        {id: 4, name: "摩卡2", price: 140, cups: 0},
-        {id: 5, name: "摩卡3", price: 140, cups: 0},
-        {id: 6, name: "摩卡4", price: 140, cups: 0},
-        {id: 7, name: "摩卡5", price: 140, cups: 0},
-
+        {id: 3, name: "摩卡", price: 140, cups: 0},
     ]);
 
-    const [totalCups, setTotalCups] = useState(0);
+    //const [totalCups, setTotalCups] = useState(0);
 
-    function addOne(id: number) {
-        const newOrders = orders.map(
+    function doChange(id:number, amount: number) {
+        setOrders(orderList => orderList.map(
             order => {
                 if (order.id === id){
-                    return {...order, cups: order.cups + 1}
+                    return {...order, cups: order.cups + amount}
                 }
                 return order;
             }
-        );
-        setOrders(newOrders);
-        setTotalCups(totalCups + 1);
+        ))
     }
 
+    const totalCups = orders.reduce(
+        (total, order) => {
+            return total + order.cups;
+        }, 0
+    );
     const totalAmount = orders.reduce(
         (total, order) => {
             return total + order.cups * order.price
@@ -68,7 +67,7 @@ export default function App() {
                    <OrderCard
                        key={order.id}
                        {...order}
-                       onAdd={addOne}
+                       onChange={doChange}
                    />
                 ))
 
