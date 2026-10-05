@@ -8,6 +8,7 @@ import Page6 from './pages/brad06.tsx'
 import Page7 from './pages/brad07.tsx'
 import Page8 from './pages/brad08.tsx'
 import Page9 from './pages/brad09.tsx'
+import Register from './pages/RegisterPage.tsx'
 
 function App(){
     return (
@@ -64,6 +65,12 @@ function App(){
                 <Route
                     path="/page9"
                     element={<Page9 />}
+                />
+            </Routes>
+            <Routes>
+                <Route
+                    path="/register"
+                    element={<Register />}
                 />
             </Routes>
 
