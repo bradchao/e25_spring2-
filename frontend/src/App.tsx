@@ -6,6 +6,7 @@ import Page4 from './pages/brad04.tsx'
 import Page5 from './pages/brad05.tsx'
 import Page6 from './pages/brad06.tsx'
 import Page7 from './pages/brad07.tsx'
+import Page8 from './pages/brad08.tsx'
 
 function App(){
     return (
@@ -50,6 +51,12 @@ function App(){
                 <Route
                     path="/page7"
                     element={<Page7 />}
+                />
+            </Routes>
+            <Routes>
+                <Route
+                    path="/page8"
+                    element={<Page8 />}
                 />
             </Routes>
 

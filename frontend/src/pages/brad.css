@@ -6,3 +6,13 @@
     padding: 20px;
     border-radius: 10px;
 }
+.container {
+    max-width: 800px;
+    margin: 2px auto;
+    padding: 20px;
+}
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
