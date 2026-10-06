@@ -13,7 +13,7 @@ export default function LoginPage() {
     const [message, setMessage] = useState("");
 
     const doSubmit = async (
-        e: SyntheticEvent<HTMLFormElement, SubmitEvent>){
+        e: SyntheticEvent<HTMLFormElement, SubmitEvent>)=> {
         e.preventDefault();
 
         try {
@@ -36,7 +36,7 @@ export default function LoginPage() {
         <main>
             <h1>Login Page</h1>
             <hr />
-            <form>
+            <form onSubmit={doSubmit}>
                 <TextInput
                     label='Account'
                     type='text'
