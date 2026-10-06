@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class JwtToken {
     private static final String SECRET = "BradChao12345677654321abcdefgCatDog";
-    private static final long EXP_TIME = 10*60*1000;
+    private static final long EXP_TIME = 60*60*1000;
     private static final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
     public static String createToken(String subject){

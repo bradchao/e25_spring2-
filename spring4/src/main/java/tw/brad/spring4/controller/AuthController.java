@@ -29,10 +29,14 @@ public class AuthController {
         if (!BCrypt.checkpw(login.getPasswd(), member.getPasswd())){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("密碼錯誤");
         }
-        String token = JwtToken.createToken(
-                member.getId() + ":" + member.getAccount());
-        return ResponseEntity.ok(
-                new LoginResponse(token, member.getAccount(), member.getName()));
+        try {
+            String token = JwtToken.createToken(
+                    member.getId() + ":" + member.getAccount());
+            return ResponseEntity.ok(
+                    new LoginResponse(token, member.getAccount(), member.getName()));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ERROR");
+        }
     }
 
     @PostMapping("/api/test1")
