@@ -9,5 +9,5 @@ import lombok.Data;
 public class Member {
     @Id
     private Long id;
-    private String account, passwd;
+    private String account, passwd, name;
 }
