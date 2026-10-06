@@ -9,6 +9,7 @@ import Page7 from './pages/brad07.tsx'
 import Page8 from './pages/brad08.tsx'
 import Page9 from './pages/brad09.tsx'
 import Register from './pages/RegisterPage.tsx'
+import Login from './pages/LoginPage.tsx'
 
 function App(){
     return (
@@ -71,6 +72,12 @@ function App(){
                 <Route
                     path="/register"
                     element={<Register />}
+                />
+            </Routes>
+            <Routes>
+                <Route
+                    path="/login"
+                    element={<Login />}
                 />
             </Routes>
 
