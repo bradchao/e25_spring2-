@@ -5,6 +5,8 @@ import PasswdInput from "../components/register/PasswdInput.tsx";
 import NameInput from "../components/register/NameInput.tsx";
 import GenderInput from "../components/register/GenderInput.tsx";
 import AreaSelect from "../components/register/AreaSelect.tsx";
+import HabitCheckBox from "../components/register/HabitCheckBox.tsx";
+import IconUpload from "../components/register/IconUpload.tsx";
 
 export default function RegisterPage() {
     const [form, setForm] = useState<RegisterForm>({
@@ -42,6 +44,15 @@ export default function RegisterPage() {
                     value={form.area}
                     onChange={area => setForm({...form, area})}
                 />
+                <HabitCheckBox
+                    values={form.habits}
+                    onChange={habits => setForm({...form, habits})}
+                />
+                <IconUpload
+                    value={form.icon}
+                    onChange={icon => setForm({...form, icon})}
+                />
+
                 <button type="submit">註冊</button>
             </form>
 
