@@ -1,6 +1,7 @@
 import TextInput from "../components/login/TextInput.tsx";
-import {useState} from "react";
+import {type SyntheticEvent, useState} from "react";
 import type {LoginRequest} from "../types/Login.ts";
+import {login} from "../services/AuthService.ts";
 
 
 export default function LoginPage() {
@@ -8,6 +9,28 @@ export default function LoginPage() {
         account: "",
         passwd: ""
     });
+
+    const [message, setMessage] = useState("");
+
+    const doSubmit = async (
+        e: SyntheticEvent<HTMLFormElement, SubmitEvent>){
+        e.preventDefault();
+
+        try {
+            const result = await login(form);
+            if (result.success && result.member && result.token) {
+                localStorage.setItem("token", result.token);
+                localStorage.setItem("member", JSON.stringify(result.member));
+                console.log("OK");
+            } else {
+                setMessage("Login Failure");
+            }
+        }catch (e) {
+            console.log(e);
+            setMessage("System Busy");
+        }
+    }
+
 
     return (
         <main>
@@ -32,6 +55,7 @@ export default function LoginPage() {
                     Login
                 </button>
             </form>
+            {message && (<p>{message}</p>)}
         </main>
     );
 }
