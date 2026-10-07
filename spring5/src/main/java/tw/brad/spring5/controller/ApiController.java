@@ -40,7 +40,7 @@ public class ApiController {
     @RequestMapping("/main")
     public ResponseEntity<Map<String,Object>> main(){
         System.out.println("Data.....");
-        return ResponseEntity.ok(Map.of("suceess",true, "data", "Member Only"));
+        return ResponseEntity.ok(Map.of("success",true, "data", "Member Only"));
     }
 
 

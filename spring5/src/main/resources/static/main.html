@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = async function(){
+            let token = localStorage.getItem("token");
+            if (!token){
+                console.log("no token");
+                window.location.href = "login.html";
+            }
+
+            let resp = await fetch("/api/main",{
+                method: "POST",
+                headers: {
+                    "Authorization": 'Bearer' + token
+                }
+            });
+
+            let json = await resp.json();
+            console.log(json);
+            if (json.success){
+                console.log("Load Success");
+            }else{
+                console.log("Load Failure");
+                window.location.href = "login.html";
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Main Page</h1>
+    <hr />
+    Hello, World
+</body>
+</html>

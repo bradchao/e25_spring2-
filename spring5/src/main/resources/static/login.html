@@ -23,9 +23,10 @@
           passwd: passwd
         })
       });
-      let data = resp.json();
+      let data = await resp.json();
       if (data.success){
         localStorage.setItem("token", data.token);
+        window.location.href = "main.html";
         console.log("Login Success");
       }else{
         console.log("Login Failure");
