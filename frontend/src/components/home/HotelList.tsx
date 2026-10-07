@@ -10,6 +10,16 @@ export default function HotelList(){
     const [result, setResult] = useState<Hotels | null>(null);
     const rpp = 10;
 
+    function changePage(nextPage: number){
+        prepareLoading();
+        setPage(nextPage);
+    }
+
+    function prepareLoading(){
+        setLoading(true);
+        setResult(null);
+    }
+
     // after
     useEffect(() => {
         async function loadHotels(){
@@ -24,6 +34,7 @@ export default function HotelList(){
                     return;
                 }
                 setResult(nextResult);
+                setLoading(false);
             }catch (e) {
 
             }
@@ -31,17 +42,28 @@ export default function HotelList(){
         loadHotels();
     }, [page]);
 
-
+    const pending = loading || result?.page !== page
 
     return (
         <div>
             <h3>Hotel Table</h3>
             <hr />
+            {pending && <p>Loading....</p>}
             {result?.data.length === 0 ? (<p>No Data</p>) : (
                 <div>
                     <div>
                         <p>TotalItem: {result?.total}</p>
-                        <p>{result?.page} / {result?.totalPage} </p>
+                        <p>
+                            <button type='button'
+                                    disabled={page === 0}
+                                    onClick={() =>
+                                        changePage(Math.max(0, page - 1))}>Prev</button>
+                            |{result?.page + 1} / {result?.totalPage} |
+                            <button type='button'
+                                    disabled={result?.isLast}
+                                    onClick={() => changePage(page + 1)}>Next</button>
+                        </p>
+
                     </div>
                     <div>
                         <table>
