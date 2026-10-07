@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form id="loginForm">
+    Account: <input id="account" /><br />
+    Password: <input type="password" id="passwd" /><br />
+    <input type="submit" value="Login" />
+  </form>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e){
+      e.preventDefault();
+      let account = document.getElementById("account").value.trim();
+      let passwd = document.getElementById("passwd").value.trim();
+      let resp = await fetch("/api/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          account: account,
+          passwd: passwd
+        })
+      });
+      let data = resp.json();
+      if (data.success){
+        localStorage.setItem("token", data.token);
+        console.log("Login Success");
+      }else{
+        console.log("Login Failure");
+      }
+
+    });
+  </script>
+</body>
+</html>
