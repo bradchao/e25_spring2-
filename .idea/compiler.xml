@@ -15,13 +15,14 @@
         <module name="spring3" />
         <module name="spring2" />
       </profile>
-      <profile name="Annotation profile for spring5" enabled="true">
+      <profile name="Annotation profile for spring6" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
+        <module name="spring6" />
         <module name="spring5" />
       </profile>
     </annotationProcessing>
@@ -32,6 +33,7 @@
       <module name="spring3" options="-parameters" />
       <module name="spring4" options="-parameters" />
       <module name="spring5" options="-parameters" />
+      <module name="spring6" options="-parameters" />
     </option>
   </component>
 </project>
