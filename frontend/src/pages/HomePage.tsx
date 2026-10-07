@@ -1,4 +1,5 @@
 import type {Member} from "../types/Member.ts";
+import HotelList from "../components/home/HotelList.tsx";
 
 export default function HomePage(){
     const memberJson = localStorage.getItem("member");
@@ -12,7 +13,7 @@ export default function HomePage(){
             <h1>Home Page</h1>
             <hr></hr>
             <h2>Welcome, {member.name}</h2>
-
+            <HotelList />
 
         </main>
     );

@@ -10,6 +10,7 @@ import Page8 from './pages/brad08.tsx'
 import Page9 from './pages/brad09.tsx'
 import Register from './pages/RegisterPage.tsx'
 import Login from './pages/LoginPage.tsx'
+import Home from './pages/HomePage.tsx'
 
 function App(){
     return (
@@ -78,6 +79,12 @@ function App(){
                 <Route
                     path="/login"
                     element={<Login />}
+                />
+            </Routes>
+            <Routes>
+                <Route
+                    path="/home"
+                    element={<Home />}
                 />
             </Routes>
 

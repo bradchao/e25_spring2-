@@ -1,5 +1,6 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import type {Hotels} from "../../types/Hotel.ts";
+import {queryHotels} from "../../services/HotelService.ts";
 
 export default function HotelList(){
     const [page, setPage] = useState(0);
@@ -8,6 +9,28 @@ export default function HotelList(){
     const [retry, setRetry] = useState(0);
     const [result, setResult] = useState<Hotels | null>(null);
     const rpp = 10;
+
+    // after
+    useEffect(() => {
+        async function loadHotels(){
+            const controller = new AbortController();
+            try {
+                const nextResult = await queryHotels(page,rpp, controller.signal);
+                // controller.abort() 發出
+
+                const lastPage = Math.max(0, nextResult.totalPage - 1);
+                if (page > lastPage){
+                    setPage(lastPage);
+                    return;
+                }
+                setResult(nextResult);
+            }catch (e) {
+
+            }
+        }
+        loadHotels();
+    }, [page]);
+
 
 
     return (
