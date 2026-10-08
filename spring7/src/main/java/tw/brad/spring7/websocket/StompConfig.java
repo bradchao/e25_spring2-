@@ -15,6 +15,7 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 import tw.brad.spring7.util.JwtToken;
 
+import java.security.Principal;
 import java.util.Map;
 
 @Configuration
@@ -37,6 +38,7 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
                                                    ServerHttpResponse response,
                                                    WebSocketHandler wsHandler,
                                                    Map<String, Object> attributes) throws Exception {
+                        /*
                         if (request instanceof ServletServerHttpRequest req){
                             HttpServletRequest httpReq = req.getServletRequest();
                             String tokenParam = httpReq.getParameter("token");
@@ -47,8 +49,9 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
                                 return true;
                             }
                         }
+                         */
 
-                        return false;
+                        return true;
                     }
 
                     @Override
@@ -58,7 +61,12 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
 
                     }
                 })
-                .setHandshakeHandler(new DefaultHandshakeHandler(){})
+                .setHandshakeHandler(new DefaultHandshakeHandler(){
+                    @Override
+                    protected @Nullable Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
+                        return super.determineUser(request, wsHandler, attributes);
+                    }
+                })
                 .setAllowedOriginPatterns("*")
                 .withSockJS();
 
