@@ -31,4 +31,24 @@ public class MemberController {
         return "main";
     }
 
+    @GetMapping("/members/page1")
+    public String page1(){
+        return "/members/page1";
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
+
+    @GetMapping("/admin/page1")
+    public String adminPage1(){
+        return "/admin/admin1";
+    }
+
+    @GetMapping("/page403")
+    public String page403(){
+        return "page403";
+    }
+
 }

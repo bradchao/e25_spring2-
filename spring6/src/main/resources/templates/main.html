@@ -19,5 +19,7 @@
         <span sec:authentication="name" >Account</span> /
         <span sec:authentication="principal.authorities">Role</span>
     </div>
+    <hr />
+    <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin Main</a>
 </body>
 </html>
