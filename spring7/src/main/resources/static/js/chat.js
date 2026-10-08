@@ -6,7 +6,9 @@ window.onload = function(){
     let log = document.getElementById("log");
 
     let webSocket;
-    let url = "ws://10.0.101.218:8080/BradWeb2/myserver"
+    //let url = "/ws-chat?token=" + encodeURIComponent('Bearer ' + token);
+    let url = "/ws-chat";
+    let client = null;
 
     start.style.display = "block";
     chatDiv.style.display = "none";
@@ -17,39 +19,29 @@ window.onload = function(){
     });
 
     send.addEventListener("click", function(){
-        let message = {
-            message: mesg.value
-        };
-        webSocket.send(JSON.stringify(message));
+        client.send("/app/chat/send",{}, mesg.value.trim());
+        mesg.value = "";
     });
 
     function connect(url){
         console.log("Connecting...");
-        webSocket = new WebSocket(url);
-
-        webSocket.onopen = function(event){
-            //console.log("Open");
+        webSocket = new SocketJS(url);
+        client = Stomp.over(webSocket);
+        client.connect({}, function(frame){
             start.style.display = "none";
             chatDiv.style.display = "block";
-        }
 
-        webSocket.onmessage = function(event){
-            console.log(event);
-            let mesgObj = JSON.parse(event.data);
-            log.innerHTML += mesgObj.message + "<br />";
-
-        }
-
-        webSocket.onclose = function(event){
-            console.log("Close");
-        }
-
-        webSocket.onerror = function(event){
-            console.log("Error");
-        }
-
+            client.subscribe("/topic/public", function (message) {
+                console.log(message);
+                let body = JSON.parse(message);
+                receiveMessage(body);
+            });
+        });
 
     }
 
+    function receiveMessage(mesg) {
+        chatDiv.innerHTML = `${mesg.content}`;
+    }
 
 }
