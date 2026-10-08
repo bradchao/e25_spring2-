@@ -38,7 +38,8 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"))
                 .exceptionHandling(
-                        e -> e.accessDeniedPage("/page403"));
+                        e ->
+                                e.accessDeniedPage("/page403"));
 
         return httpSecurity.build();
     }
