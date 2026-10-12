@@ -1,9 +1,6 @@
 package tw.brad.spring8.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tw.brad.spring8.dto.TextRequest;
 import tw.brad.spring8.dto.TextResponse;
 import tw.brad.spring8.service.AiTextService;
@@ -23,12 +20,12 @@ public class AIController {
         return Map.of("status", "Up");
     }
 
-    @GetMapping("/ai/desc")
+    @PostMapping("/ai/desc")
     public TextResponse descProduct(@RequestBody TextRequest request){
         return new TextResponse(service.descProduct(request.text()));
     }
 
-    @GetMapping("/ai/complaint")
+    @PostMapping("/ai/complaint")
     public TextResponse complaint(@RequestBody TextRequest request){
         return new TextResponse(service.complaint(request.text()));
     }
