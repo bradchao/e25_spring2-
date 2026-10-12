@@ -1,5 +1,6 @@
 package tw.brad.spring7.controller;
 
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -19,4 +20,17 @@ public class ChatController {
         chatMessage.setTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         return chatMessage;
     }
+
+    @MessageMapping("/chat/{roomId}/send")
+    @SendTo("/topic/rooms/{roomId}")
+    public ChatMessage chatMessage(@DestinationVariable String roomId, String content){
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setContent(content);
+        chatMessage.setTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        return chatMessage;
+    }
+
+
+
+
 }

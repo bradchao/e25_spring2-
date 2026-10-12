@@ -19,7 +19,7 @@ import java.security.Principal;
 import java.util.Map;
 
 @Configuration
-@EnableWebSocketMessageBroker
+@EnableWebSocketMessageBroker   // STOMP
 public class StompConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
@@ -50,7 +50,6 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
                             }
                         }
                          */
-                        System.out.println("beforeHandshake");
                         return true;
                     }
 
@@ -58,7 +57,6 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
                     public void afterHandshake(ServerHttpRequest request,
                                                ServerHttpResponse response,
                                                WebSocketHandler wsHandler, @Nullable Exception exception) {
-                        System.out.println("afterHandshake");
                     }
                 })
                 .setHandshakeHandler(new DefaultHandshakeHandler(){
