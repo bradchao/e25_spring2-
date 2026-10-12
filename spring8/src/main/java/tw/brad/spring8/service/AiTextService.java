@@ -26,7 +26,7 @@ public class AiTextService {
                 2. 客戶訴求
                 3. 需要確認的資料
                 不要承諾退款, 賠償或是出貨時間等等
-                直接輸出文字內容, 不要 json
+                直接輸出文字內容,不要 json
                 """, text);
     }
 
