@@ -1,5 +1,5 @@
 window.onload = function(){
-    let url = "ws://10.0.100.160:8080/BradWeb/mycenter";
+    let url = "ws://10.0.100.160:8080/wb";
     let webSocket = new WebSocket(url);
 
     let clear = document.getElementById("clear");
