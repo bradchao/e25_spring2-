@@ -2,11 +2,13 @@ package tw.brad.spring9.service;
 
 import jakarta.validation.Validator;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.stereotype.Service;
 import tw.brad.spring9.converter.OutputConvertor;
 import tw.brad.spring9.dto.response.ProductCriteria;
 import tw.brad.spring9.exception.ModelCallException;
 import tw.brad.spring9.exception.ModelOutputException;
 
+@Service
 public class StructuredAiService {
     private final ChatClient chatClient;
     private final Validator validator;
