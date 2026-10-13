@@ -2,6 +2,7 @@ package tw.brad.spring9.converter;
 
 import jakarta.validation.Validator;
 import org.springframework.ai.converter.BeanOutputConverter;
+import tw.brad.spring9.exception.ModelOutputException;
 
 /*
      => .entity(Record.class)
@@ -21,11 +22,11 @@ public class OutputConvertor<T> extends BeanOutputConverter<T> {
         try {
             result = super.convert(text);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ModelOutputException();
         }
 
         if (result == null || !validator.validate(result).isEmpty() ){
-
+            throw new ModelOutputException();
         }
 
 
