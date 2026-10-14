@@ -35,19 +35,18 @@ public class ProductAiService {
                     例如「找價格低於100且有庫存的飲料，列出5筆」：keyword=null、categoryId=1、
                     maxPrice=100、maxPriceInclusive=false、inStockOnly=true、limit=5。
                     不支援價格下限、最便宜排序、訂單、訂購、付款或修改資料；請澄清或說明限制。
-                    若指定幣別，先說明無法換算並請使用資料原始價格數值。
-                    類別使用 SQL 的 1～8，不沿用第二階段 BEVERAGE/FOOD 列舉。
+                    類別使用 SQL 的 1～8。
                     商品停產與缺貨是不同概念，請忠實說明 discontinued 與 unitsInStock。
                     找不到時明確說明，不捏造商品。truncated=true 時說明只展示部分符合結果。
                     每次為獨立請求，不記得上一題；需求不明先詢問，不必強行呼叫工具。
                     """)
-                .user(user -> user.text("商品需求:{input}").param("input", text) )
+                .user(user -> user.text("商品需求:\n{input}").param("input", text) )
                 .tools(tool)
                 .call()
                 .chatResponse();
 
         String answer = response.getResult().getOutput().getText();
-        return new AskResponse(answer, "JSON", null);
+        return new AskResponse(answer, "JSON", tool.getTracesList());
     }
 
 

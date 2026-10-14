@@ -4,17 +4,24 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import kotlin.collections.ArrayDeque;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import tw.brad.spinga.dto.request.ProductFilter;
 import tw.brad.spinga.dto.response.ProductLookup;
+import tw.brad.spinga.dto.response.ToolTrace;
 import tw.brad.spinga.service.ProductService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ProductTool {
 
     private final ProductService service;
+    private final List<ToolTrace> traces = new ArrayList<>();
+
 
     public ProductTool(ProductService service){this.service = service;}
 
@@ -47,18 +54,26 @@ public class ProductTool {
             @ToolParam(description = "回傳筆數 1~10, 未指定為 5")
             Integer limit
     ){
-        System.out.println("ProductTool: searchProduct()");
         ProductFilter filter =
                 new ProductFilter(keyword,categoryId, maxPrice, macPriceInclusive, isStockOnly, limit);
-        return service.search(filter);
+
+        ProductLookup result = service.search(filter);
+        traces.add(new ToolTrace("searchProduct", filter, result));
+
+        return result;
     }
 
     @Tool(description = "依照商品編號查詢出商品的價格,庫存等等; 找不到為 null")
     public ProductLookup getProductById(
             @ToolParam(description = "商品編號, 必須大於 0") Integer productId
     ){
-        System.out.println("ProductTool: getProductById():" +productId);
-        return service.findById(productId);
+        ProductLookup result = service.findById(productId);
+        traces.add(new ToolTrace("getProductId", Map.of("productId", productId), result));
+        return result;
+    }
+
+    public List<ToolTrace> getTracesList(){
+        return List.copyOf(traces);
     }
 
 
