@@ -17,6 +17,7 @@ public class ProductAiService {
     }
 
     public AskResponse ask(String text){
+        System.out.println("AiService: ask()");
         ProductTool tool = new ProductTool(productService);
 
         var response= chatClient.prompt()
@@ -38,9 +39,9 @@ public class ProductAiService {
                     類別使用 SQL 的 1～8，不沿用第二階段 BEVERAGE/FOOD 列舉。
                     商品停產與缺貨是不同概念，請忠實說明 discontinued 與 unitsInStock。
                     找不到時明確說明，不捏造商品。truncated=true 時說明只展示部分符合結果。
-                    每次為獨立請求，不記得上一題；需求不明先詢問，不必強行呼叫工具。                        
-                        """)
-                .user(user -> user.text("商品需求:").param("input", text) )
+                    每次為獨立請求，不記得上一題；需求不明先詢問，不必強行呼叫工具。
+                    """)
+                .user(user -> user.text("商品需求:{input}").param("input", text) )
                 .tools(tool)
                 .call()
                 .chatResponse();

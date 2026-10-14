@@ -7,7 +7,6 @@ import tw.brad.spinga.model.Product;
 
 import java.util.Optional;
 
-@Repository
 public interface ProductRepository {
     ProductLookup search(ProductFilter filter);
     Optional<Product> findById(int productId);

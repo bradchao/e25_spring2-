@@ -1,6 +1,7 @@
 package tw.brad.spinga.repository;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Repository;
 import tools.jackson.databind.json.JsonMapper;
 import tw.brad.spinga.dto.request.ProductFilter;
 import tw.brad.spinga.dto.response.ProductLookup;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class InMemoryProductRepository implements ProductRepository{
     private final List<Product> products;
 

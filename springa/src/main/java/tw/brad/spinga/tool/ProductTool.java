@@ -47,6 +47,7 @@ public class ProductTool {
             @ToolParam(description = "回傳筆數 1~10, 未指定為 5")
             Integer limit
     ){
+        System.out.println("ProductTool: searchProduct()");
         ProductFilter filter =
                 new ProductFilter(keyword,categoryId, maxPrice, macPriceInclusive, isStockOnly, limit);
         return service.search(filter);
@@ -56,6 +57,7 @@ public class ProductTool {
     public ProductLookup getProductById(
             @ToolParam(description = "商品編號, 必須大於 0") Integer productId
     ){
+        System.out.println("ProductTool: getProductById():" +productId);
         return service.findById(productId);
     }
 

@@ -1,0 +1,14 @@
+"answer": "我已查詢「類別 8（Seafood）」的商品，
+依照要求列出 3 筆（資料來自所提供資料集；價格以原始數值顯示，未標示幣別）。
+注意：資料回傳顯示 truncated=true，
+表示總共有多筆符合（totalMatches=12），
+此處只展示部分結果。\n\n查詢參數（供參考）：
+keyword=null、
+categoryId=8、
+isStockOnly=false、
+limit=3\n\n
+查到的商品：\n
+1. 商品編號: 10  \n   名稱: Ikura  \n   類別編號: 8 (Seafood)  \n   規格: 12 - 200 ml jars  \n   價格(unitPrice): 31.0  \n   庫存(unitsInStock): 31  \n   停產(discontinued): false\n\n
+2. 商品編號: 13  \n   名稱: Konbu  \n   類別編號: 8 (Seafood)  \n   規格: 2 kg box  \n   價格(unitPrice): 6.0  \n   庫存(unitsInStock): 24  \n   停產(discontinued): false\n\n
+3. 商品編號: 18  \n   名稱: Carnarvon Tigers  \n   類別編號: 8 (Seafood)  \n   規格: 16 kg pkg.  \n   價格(unitPrice): 62.5  \n   庫存(unitsInStock): 42  \n   停產(discontinued): false\n\n補充說明：\n- discontinued（是否停產）表示該商品是否已停產；unitsInStock 表示目前庫存數量，兩者是不同概念。  \n- 若要我列出更多筆（例如顯示全部 12 筆或再取 5~10 筆）、只顯示有庫存的商品、或加上價格上限篩選，請告訴我具體條件（記得價格上限需同時指定 maxPriceInclusive 為 true 或 false）。",
+"dataSour

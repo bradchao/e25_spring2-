@@ -12,18 +12,13 @@ import tw.brad.spinga.repository.ProductRepository;
  */
 @Service
 public class ProductService {
-    @Autowired
-    private ProductRepository repository;
+    private final ProductRepository repository;
+    private final Validator validator;
 
-//    @Autowired
-//    private Validator validator;
-
-    /*
     public ProductService(ProductRepository repository, Validator validator){
         this.repository = repository;
         this.validator = validator;
     }
-    */
 
     public ProductLookup search(ProductFilter filter){
 
