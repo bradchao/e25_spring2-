@@ -15,7 +15,7 @@ import java.util.List;
 
 /** Employees 的唯讀映射；不直接序列化 Entity，查詢結果轉成 DTO。 */
 @Entity
-@Table(name = "Employees")
+@Table(name = "employees")
 @Data
 public class Employee {
     @Id

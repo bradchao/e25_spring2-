@@ -14,7 +14,7 @@ import java.util.List;
 
 /** Customers 的唯讀映射；不直接序列化 Entity，查詢結果轉成 DTO。 */
 @Entity
-@Table(name = "Customers")
+@Table(name = "customers")
 @Data
 public class Customer {
     @Id

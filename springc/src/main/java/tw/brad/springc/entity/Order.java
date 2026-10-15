@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 /** Orders 的唯讀映射；不直接序列化 Entity，查詢結果轉成 DTO。 */
 @Entity
-@Table(name = "Orders")
+@Table(name = "orders")
 @Data
 public class Order {
     @Id
