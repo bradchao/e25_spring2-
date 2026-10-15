@@ -24,7 +24,9 @@ public class NorthTool {
         this.traces = traces;
     }
 
-    @Tool(description = "依英文姓名片段查全部符合的員工編號、姓名、職稱與主管編號；本工具只查基本資料。")
+    @Tool(
+            description = "依英文姓名片段查全部符合的員工編號、姓名、職稱與主管編號；本工具只查基本資料。",
+            returnDirect = true)
     public TableResult searchEmployees(
             @ToolParam(description = "英文姓名片段, 查全部的話為 null", required = false)
             String keyword){
@@ -34,7 +36,8 @@ public class NorthTool {
                 directory.employees(keyword));
     }
 
-    @Tool(description = "依公司英文名稱片段查全部符合的客戶代碼、公司與國家；代碼保留原大小寫及空白。")
+    @Tool(description = "依公司英文名稱片段查全部符合的客戶代碼、公司與國家；代碼保留原大小寫及空白。",
+            returnDirect = true)
     public TableResult searchCustomers(
             @ToolParam(description = "公司英文姓名片段, 查全部的話為 null", required = false)
             String keyword){
@@ -48,7 +51,7 @@ public class NorthTool {
     @Tool(description = """
         依員工編號查全部訂單，依訂單編號遞減；
         適用使用者已提供員工編號；只有姓名時改用 searchOrdersByEmployeeName。
-        """)
+        """,returnDirect = true)
     public TableResult searchOrdersByEmployees(
             @ToolParam(description = "員工編號", required = false)
             Integer employeeId){
@@ -60,7 +63,7 @@ public class NorthTool {
     @Tool(description = """
         依客戶代碼查全部訂單，依訂單編號遞減；
         適用使用者已提供客戶代碼；只有公司名時改用 searchOrdersByCustomerName
-        """)
+        """,returnDirect = true)
     public TableResult searchOrdersCustomers(
             @ToolParam(description = "客戶代碼", required = false)
             String customerId){
@@ -74,7 +77,7 @@ public class NorthTool {
         依員工姓名片段一次取得員工及全部訂單。
         查姓名的訂單優先用此工具。
         多人符合時只回傳候選名單，必須請使用者指定，不可自行選擇或繼續查候選訂單。
-        """)
+        """,returnDirect = true)
     public TableResult searchOrdersByEmployeeName(
             @ToolParam(description = "員工姓名片段", required = false)
             String keyword){
@@ -87,7 +90,7 @@ public class NorthTool {
         依公司名稱片段一次取得客戶及全部訂單。
         查公司名的訂單優先用此工具。
         多家公司符合時只回傳候選名單，必須請使用者指定，不可自行選擇或繼續查候選訂單。
-        """)
+        """,returnDirect = true)
     public TableResult searchOrdersByCustomerName(
             @ToolParam(description = "公司名稱片段", required = false)
             String keyword){
