@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tw.brad.springc.dto.response.TableResult;
+import tw.brad.springc.entity.Customer;
+import tw.brad.springc.entity.Employee;
 import tw.brad.springc.entity.Order;
 import tw.brad.springc.repository.CustomerRepository;
 import tw.brad.springc.repository.EmployeeRepository;
@@ -46,7 +48,7 @@ public class OrderQueryService {
      * 多人符合時只回傳候選員工，不混合他們的訂單，也不擅自挑選第一位。
      */
     public TableResult searchByEmployeeName(String keyword) {
-        var matches = employees.searchWithOrders(DirectoryService.toPattern(keyword));
+        List<Employee> matches = employees.searchWithOrders(DirectoryService.toPattern(keyword));
         if (matches.isEmpty()) {
             return new TableResult(List.of("員工編號", "姓名"), List.of(), "找不到符合姓名的員工。");
         }
@@ -59,14 +61,14 @@ public class OrderQueryService {
             return new TableResult(List.of("員工編號", "姓名"), candidates,
                     "需要澄清：符合多位員工。這是候選名單，不是訂單；請使用者指定員工編號，不可自行選擇。");
         }
-        var employee = matches.getFirst();
+        Employee employee = matches.get(0);
         return toTable(employee.getOrders(), "員工 " + employee.getFirstName() + " "
                 + employee.getLastName() + "（編號 " + employee.getEmployeeId() + "）");
     }
 
     /** 公司名稱一次查詢；沒有訂單的公司仍會保留，與找不到公司區分。 */
     public TableResult searchByCustomerName(String keyword) {
-        var matches = customers.searchWithOrders(DirectoryService.toPattern(keyword));
+        List<Customer> matches = customers.searchWithOrders(DirectoryService.toPattern(keyword));
         if (matches.isEmpty()) {
             return new TableResult(List.of("客戶代碼", "公司名稱"), List.of(), "找不到符合名稱的客戶。");
         }
@@ -77,7 +79,7 @@ public class OrderQueryService {
             return new TableResult(List.of("客戶代碼", "公司名稱"), candidates,
                     "需要澄清：符合多家公司。這是候選名單，不是訂單；請使用者指定客戶代碼，不可自行選擇。");
         }
-        var customer = matches.getFirst();
+        Customer customer = matches.get(0);
         return toTable(customer.getOrders(), "客戶 " + customer.getCompanyName()
                 + "（代碼 " + customer.getCustomerId() + "）");
     }

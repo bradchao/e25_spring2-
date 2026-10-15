@@ -20,7 +20,7 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     @Query("""
         select distinct c
         from Customer c
-//        left join fetch c.orders
+        left join fetch c.orders
         where lower(c.companyName) like :keyword
         order by c.customerId
         """)

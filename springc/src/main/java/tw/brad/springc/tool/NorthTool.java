@@ -66,7 +66,7 @@ public class NorthTool {
             String customerId){
         return trace("searchOrdersCustomers",
                 "customerId", customerId,
-                searchOrdersCustomers(customerId));
+                orders.searchByCustomer(customerId));
     }
 
 
@@ -80,7 +80,7 @@ public class NorthTool {
             String keyword){
         return trace("searchOrdersByEmployeeName",
                 "keyword", keyword,
-                searchOrdersByEmployeeName(keyword));
+                orders.searchByEmployeeName(keyword));
     }
 
     @Tool(description = """
@@ -93,7 +93,7 @@ public class NorthTool {
             String keyword){
         return trace("searchOrdersByCustomerName",
                 "keyword", keyword,
-                searchOrdersByCustomerName(keyword));
+                orders.searchByCustomerName(keyword));
 
     }
 
