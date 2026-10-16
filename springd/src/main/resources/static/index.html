@@ -27,8 +27,9 @@
             status.textContent = "";
             result.textContent = "";
 
-            if (uploadFile){
-                preview.src = await  readFile(uploadFile);
+            let file = uploadFile.files[0];
+            if (file){
+                preview.src = await  readFile(file);
                 preview.hidden = false;
             }
         });
@@ -38,8 +39,12 @@
             status.textContent = "AI 判讀中......";
             result.textContent = "";
 
-            let dataUrl = await readFile(uploadFile);
+            let file = uploadFile.files[0];
+            let dataUrl = await readFile(file);
             let base64 = dataUrl.split(",", 2)[1];
+
+            console.log("==> " + file.type)
+            //console.log(base64);
 
             let response = await fetch("/ai/ask", {
                 method: "POST",
@@ -47,8 +52,8 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    type: dataUrl.type,
-                    base64
+                    type: file.type,
+                    base64: base64
                 })
             });
 
@@ -61,9 +66,11 @@
 
         function readFile(file) {
             return new Promise((resolve) => {
+                console.log(file)
                 let reader = new FileReader();
                 reader.onload = () => resolve(reader.result);
                 reader.readAsDataURL(file);
+
             });
         }
 
